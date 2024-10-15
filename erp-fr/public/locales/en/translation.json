@@ -1,0 +1,276 @@
+{
+    "dashboard": "Dashboard",
+    "crm": {
+        "title": "CRM",
+        "subItem": {
+            "client": {
+                "title": "Client",
+                "subItem": {
+                    "addClient": "Add Client",
+                    "clientList": "Client List",
+                    "clientGroup": "Client Group",
+                    "clientStatement": "Client statement"
+                }
+            },
+            "supplier": {
+                "title": "Supplier",
+                "subItem": {
+                    "addSupplier": "Add Supplier",
+                    "supplierList": "Supplier List",
+                    "supplierGroup": "Supplier Group",
+                    "supplierStatement": "Supplier Statement"
+                }
+            }
+        }
+    },
+    "account": {
+        "title": "Account",
+        "subItem": {
+            "receive": {
+                "title": "Receive",
+                "subItem": {
+                    "addReceive": "Add Receive",
+                    "receiveList": "Receive List"
+                }
+            },
+            "expense": {
+                "title": "Expense",
+                "subItem": {
+                    "addExpense": "Add New",
+                    "supplierPayment": "Supplier Payment"
+                }
+            },
+            "accounts": {
+                "title": "Accounts",
+                "subItem": {
+                    "addAccounts": "Add Accounts",
+                    "accountsBalance": "Account Balance",
+                    "accountsList": "Account List",
+                    "accountsStatement": "Account Statement"
+                }
+            },
+            "transfer": {
+                "title": "Transfer",
+                "subItem": {
+                    "transferCreat": "Transfer creat",
+                    "transferList": "Transfer List"
+                }
+            }
+        }
+    },
+    "profit": {
+        "title": "Total Profit"
+    },
+    "service": {
+        "title": "Service",
+        "subItem": {
+            "repairClient": {
+                "title": "Repair Customers"
+            },
+            "addNew": {
+                "title": "Add New"
+            }
+        }
+    },
+    "loan": {
+        "title": "Loan",
+        "subItem": {
+            "addNewLoan": {
+                "title": "Add New Loan"
+            },
+            "loanList": {
+                "title": "Loan List"
+            },
+            "loanReceive": {
+                "title": "Loan Receive"
+            },
+            "loanPayment": {
+                "title": "Loan Payment"
+            }
+        }
+    },
+    "bill": {
+        "title": "Bill",
+        "subItem": {
+            "addNew": {
+                "title": "Add New"
+            },
+            "invoiceList": {
+                "title": "Invoice List"
+            },
+            "draftInvoice": {
+                "title": "Draft Invoice"
+            },
+            "selsReturn": {
+                "title": "Sels Return",
+                "subItem": {
+                    "addReturn": "Add Return",
+                    "returnList": "Return List"
+                }
+            }
+        }
+    },
+    "product": {
+        "title": "Product",
+        "subItem": {
+            "product": {
+                "title": "Product",
+                "subItem": {
+                    "productCreate": "Product Create",
+                    "productList": "Product List",
+                    "productGroup": "Product Group"
+                }
+            },
+            "productAsset": {
+                "title": "Product Asset",
+                "subItem": {
+                    "productUnit": "Product Unit"
+                }
+            },
+            "purchase": {
+                "title": "Purchase",
+                "subItem": {
+                    "addNew": "Add New",
+                    "purchaseList": "Purchase List",
+                    "purchaseInvoiceList": "Purchase Invoice List",
+                    "purchaseReport": "Purchase Report"
+                }
+            },
+            "productStock": {
+                "title": "Product Stock"
+            }
+        }
+    },
+    "sms": {
+        "title": "SMS",
+        "subItem": {
+            "customer": {
+                "title": "Customer"
+            },
+            "customerGroup": {
+                "title": "Customer Group"
+            },
+            "supplier": {
+                "title": "Supplier"
+            },
+            "supplierGroup": {
+                "title": "Sels Return"
+            },
+            "smsSchedule": {
+                "title": "Sms Schedule"
+            },
+            "scheduleReport": {
+                "title": "Schedule Report"
+            }
+        }
+    },
+    "staff": {
+        "title": "STAFF",
+        "subItem": {
+            "staffCreate": {
+                "title": "Staff Create"
+            },
+            "StaffList": {
+                "title": "Staff List"
+            },
+            "staffPayment": {
+                "title": "Stuff Payment",
+                "subItem": {
+                    "paymentCreate": "Payment Create",
+                    "staffPaymentReport": "Staff Payment Report"
+                }
+            },
+            "staffSalary": {
+                "title": "Staff Salary",
+                "subItem": {
+                    "addSalary": "Add Salary",
+                    "salaryReport": "Salary Report"
+                }
+            },
+            
+            "staffAttendence": {
+                "title": "Staff Attendence",
+                "subItem": {
+                    "attendenceCreate": "Attenden CeCreate",
+                    "attendenceReport": "Attendence Report",
+                    "monthlyAttendenceReport": "Monthly Attendence Report"
+                }
+            },
+            "staffDipertment": {
+                "title": "Staff Dipertment"
+            },
+            "staffDesignation": {
+                "title": "Staff Designation"
+            }
+        }
+    },
+    "duereport": {
+        "title": "Due Report",
+        "subItem": {
+            "dueList": {
+                "title": "Due List"
+            },
+            "clientWise": {
+                "title": "Client Wise"
+            },
+            "groupWise": {
+                "title": "Group Wise"
+            }
+        }
+    },
+    "salesReport": {
+        "title": "Sales Report",
+        "subItem": {
+            "all": {
+                "title": "All"
+            },
+            "daily": {
+                "title": "Daily"
+            },
+            "customerWise": {
+                "title": "Customer Wise"
+            },
+            "groupWise": {
+                "title": "Group Wise"
+            },
+            "productWise": {
+                "title": "Product Wise"
+            },
+            "productGroupWise": {
+                "title": "Product Group Wise"
+            }
+        }
+    },
+    "depositReport": {
+        "title": "Deposit Report",
+        "subItem": {
+            "allDeposit": {
+                "title": "All Deposit"
+            },
+            "categoryWise": {
+                "title": "Category Wise"
+            },
+            "CustomerWise": {
+                "title": "Customer Wise"
+            }
+        }
+    },
+    "expenseReport": {
+        "title": "Expense Report",
+        "subItem": {
+            "allExpense": {
+                "title": "All Expense"
+            },
+            "categoryWise": {
+                "title": "Category Wise"
+            },
+            "subCategoryWise": {
+                "title": "Sub Category Wise"
+            },
+            "supplierPurchasePayment": {
+                "title": "Supplier Purchase Payment"
+            }
+        }
+    },
+    "setting": "Setting"
+}

@@ -1,0 +1,264 @@
+{
+    "dashboard": "ড্যাশবোর্ড",
+    "crm": {
+        "title": "কাস্টমার রিলেশনশিপ",
+        "subItem": {
+            "client": {
+                "title": "কাস্টমার",
+                "subItem": {
+                    "addClient": "কাস্টমার যুক্ত করুন",
+                    "clientList": "কাস্টমার লিস্ট",
+                    "clientGroup": "কাস্টমার গ্রুপ",
+                    "clientStatement": "কাস্টমার রিপোর্ট"
+                }
+            },
+            "supplier": {
+                "title": "সাপ্লাইয়ার",
+                "subItem": {
+                    "addSupplier": "এড সাপ্লাইয়ার",
+                    "supplierList": "সাপ্লাইয়ার লিস্ট",
+                    "supplierGroup": "সাপ্লাইয়ার গ্রুপ",
+                    "supplierStatement": "সাপ্লাইয়ার রিপোর্ট"
+                }
+            }
+        }
+    },
+    "account": {
+        "title": "একাউন্ট",
+        "subItem": {
+            "receive": {
+                "title": "রিসিভ",
+                "subItem": {
+                    "addReceive": "এড রিসিভ",
+                    "receiveList": "রিসিভ লিস্ট"
+                }
+            },
+            "expense": {
+                "title": "খরচ",
+                "subItem": {
+                    "addExpense": "নতুন যুক্ত করুন",
+                    "supplierPayment": "পন্যের টাকা প্রদান"
+                }
+            },
+            "accounts": {
+                "title": "একাউন্ট",
+                "subItem": {
+                    "addAccounts": "নতুন একাউন্ট খুলুন",
+                    "accountsBalance": "টাকার পরিমান",
+                    "accountsList": "একাউন্ট সমূহ",
+                    "accountsStatement": "লেনদেন রিপোর্ট"
+                }
+            },
+            "transfer": {
+                "title": "ট্রান্সফার",
+                "subItem": {
+                    "transferCreat": "ট্রান্সফার করুন",
+                    "transferList": "ট্রান্সফার তালিকা"
+                }
+            }
+        }
+    },
+    "profit": {
+        "title": "মোট প্রফিট"
+    },
+    "loan": {
+        "title": "লোন",
+        "subItem": {
+            "addNewLoan": {
+                "title": "নতুন লোন যুক্ত করুন"
+            },
+            "loanList": {
+                "title": "লোনের তালিকা"
+            },
+            "loanReceive": {
+                "title": "ঋন গ্রহন"
+            },
+            "loanPayment": {
+                "title": "ঋন পরিশোধ"
+            }
+        }
+    },
+    "bill": {
+        "title": "বিল ইনভয়েস",
+        "subItem": {
+            "addNew": {
+                "title": "যুক্ত করুন"
+            },
+            "invoiceList": {
+                "title": "ইনভয়েস তালিকা"
+            },
+            "draftInvoice": {
+                "title": "খসড়া ইনভয়েস"
+            },
+            "selsReturn": {
+                "title": "বিক্রয় ফেরত",
+                "subItem": {
+                    "addReturn": "যুক্ত ফেরত",
+                    "returnList": "ফেরত লিস্ট"
+                }
+            }
+        }
+    },
+    "product": {
+        "title": "প্রোডাক্ট",
+        "subItem": {
+            "product": {
+                "title": "প্রোডাক্ট",
+                "subItem": {
+                    "productCreate": "প্রোডাক্ট তৈরি",
+                    "productList": "প্রোডাক্ট তালিকা",
+                    "productGroup": "প্রোডাক্ট গ্রুপ"
+                }
+            },
+            "productAsset": {
+                "title": "প্রোডাক্ট আস্যাএট",
+                "subItem": {
+                    "productUnit": "প্রোডাক্ট ইউনিট"
+                }
+            },
+            "purchase": {
+                "title": "ক্রয়",
+                "subItem": {
+                    "addNew": "যুক্ত করুন",
+                    "purchaseList": "ক্রয় লিস্ট",
+                    "purchaseInvoiceList": "ক্রয় ইনভয়েস লিস্ট",
+                    "purchaseReport": "ক্রয় রিপোর্ট"
+                }
+            },
+            "productStock": {
+                "title": "প্রোডাক্ট স্টক"
+            }
+        }
+    },
+    "sms": {
+        "title": "এসএমএস",
+        "subItem": {
+            "customer": {
+                "title": "কাস্টমার"
+            },
+            "customerGroup": {
+                "title": "কাস্টমার গ্রুপ"
+            },
+            "supplier": {
+                "title": "সাপ্লাইয়ার"
+            },
+            "supplierGroup": {
+                "title": "সাপ্লাইয়ার গ্রুপ"
+            },
+            "smsSchedule": {
+                "title": "এসএমএস সময়সূচী"
+            },
+            "scheduleReport": {
+                "title": "এসএমএস রিপোর্ট"
+            }
+        }
+    },
+    "staff": {
+        "title": "স্টাফ",
+        "subItem": {
+            "staffCreate": {
+                "title": "স্টাফ তৈরি"
+            },
+            "StaffList": {
+                "title": "স্টাফ তালিকা"
+            },
+            "staffPayment": {
+                "title": "স্টাফ পেমেন্ট",
+                "subItem": {
+                    "paymentCreate": "পেমেন্ট তৈরি",
+                    "staffPaymentReport": "স্টাফ পেমেন্ট রিপোর্ট"
+                }
+            },
+            "staffSalary": {
+                "title": "স্টাফ বেতন",
+                "subItem": {
+                    "addSalary": "বেতন যুক্ত করুন",
+                    "salaryReport": "বেতন রিপোর্ট"
+                }
+            },
+            "staffAttendence": {
+                "title": "স্টাফ উপস্থিতি",
+                "subItem": {
+                    "attendenceCreate": "উপস্থিতি যুক্ত করুন",
+                    "attendenceReport": "উপস্থিতি রিপোর্ট",
+                    "monthlyAttendenceReport": "মাসিক উপস্থিতি রিপোর্ট"
+                }
+            },
+            "staffDipertment": {
+                "title": "স্টাফ ডিপার্টমেন্ট"
+            },
+            "staffDesignation": {
+                "title": "স্টাফ উপাধী"
+            }
+        }
+    },
+    "duereport": {
+        "title": "বাকি রিপোর্ট",
+        "subItem": {
+            "dueList": {
+                "title": "বাকি তালিকা"
+            },
+            "clientWise": {
+                "title": "কাস্টমার অনুসারে"
+            },
+            "groupWise": {
+                "title": "গ্রুপ অনুসারে"
+            }
+        }
+    },
+    "salesReport": {
+        "title": "বিক্রয় রিপোর্ট",
+        "subItem": {
+            "all": {
+                "title": "সব"
+            },
+            "daily": {
+                "title": "দৈনিক"
+            },
+            "customerWise": {
+                "title": "কাস্টমার অনুসারে"
+            },
+            "groupWise": {
+                "title": "গ্রুপ অনুসারে"
+            },
+            "productWise": {
+                "title": "প্রোডাক্ট অনুসারে"
+            },
+            "productGroupWise": {
+                "title": "প্রোডাক্ট গ্রুপ অনুসারে"
+            }
+        }
+    },
+    "depositReport": {
+        "title": "জমা রিপোর্ট",
+        "subItem": {
+            "allDeposit": {
+                "title": "সব জমা"
+            },
+            "categoryWise": {
+                "title": "খাত অনুসারে"
+            },
+            "CustomerWise": {
+                "title": "কাস্টমার অনুসারে"
+            }
+        }
+    },
+    "expenseReport": {
+        "title": "খরচ রিপোর্ট",
+        "subItem": {
+            "allExpense": {
+                "title": "সব খরচ"
+            },
+            "categoryWise": {
+                "title": "খাত অনুসারে"
+            },
+            "subCategoryWise": {
+                "title": "সাব খাত অনুসারে"
+            },
+            "supplierPurchasePayment": {
+                "title": "সাপ্লাইয়ার ক্রয় পেমেন্ট"
+            }
+        }
+    },
+    "setting": "সেটিং"
+}
