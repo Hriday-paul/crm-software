@@ -4,7 +4,9 @@ import { renewAccessToken } from "../controller/auth/auth.controler";
 
 export const VerifyUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const accessToken = req.cookies._acs || req.headers.authorization?.split('Bearer ')[1]!
+        const accessToken = req.cookies._acs || req.headers.authorization?.split('Bearer ')[1]!;
+
+        // if access token not found, then renew this access token by refresh token
         if (!accessToken) {
             const tokenRenewed = await renewAccessToken(req, res);
             if (tokenRenewed) {

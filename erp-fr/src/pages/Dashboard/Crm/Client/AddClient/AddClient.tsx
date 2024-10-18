@@ -16,7 +16,7 @@ export type add_client_type = {
     country?: string,
     address?: string,
     post_code?: string,
-    prev_due?: number,
+    previous_due?: number,
     city?: string,
     refference?: string,
     description?: string,
@@ -250,7 +250,7 @@ const AddClient = () => {
                                     :
                                 </label>
                                 <input
-                                    {...register("prev_due", { min: { value: 0, message: "Previous due must be greater than 0" }, max: { value: 1000000000, message: "Previous due must be less than 1000000000" } })}
+                                    {...register("previous_due", { min: { value: 0, message: "Previous due must be greater than 0" }, max: { value: 1000000000, message: "Previous due must be less than 1000000000" } })}
                                     type="number"
 
                                     id="prev_due"
@@ -258,7 +258,7 @@ const AddClient = () => {
                                     className="w-full rounded-sm border border-stroke px-2 py-1 dark:bg-boxdark dark:border-strokedark col-span-2 focus:border-primary outline-none text-black dark:text-white"
                                 />
                                 <span className="col-span-1"></span>
-                                {errors.prev_due && <p className="text-red-500 text-sm col-span-2">{errors.prev_due.message}</p>}
+                                {errors.previous_due && <p className="text-red-500 text-sm col-span-2">{errors.previous_due.message}</p>}
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 items-start mb-4">

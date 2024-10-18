@@ -15,8 +15,8 @@ export default function Private({ children }: { children: React.ReactNode }) {
 
     moment.locale(userInfo?.local);
 
-    if (userInfo?.email && userInfo?.fullName && userInfo?.isVerified && userInfo?.isAuthonicated) {
+    if (userInfo?.isVerified && userInfo?.isAuthonicated) {
         return children;
     }
-    return <Navigate state={{ from: location.pathname }} to="/login" replace></Navigate>
+    return <Navigate to={`/login${location.pathname ? '?back='+location.pathname : ''}` } replace></Navigate>
 }

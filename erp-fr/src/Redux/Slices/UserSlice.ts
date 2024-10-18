@@ -1,44 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type userType = {
-    fullName: string,
-    userName: string,
-    email: string,
-    phone: string,
-    id : number | null,
+    user_name: string,
     isAuthonicated: boolean,
     isVerified: boolean,
     local : string,
-    isAdmin : boolean,
+    role : 'admin' | 'user',
 }
 
 const initState: userType = {
-    fullName: '',
-    userName: '',
-    email: '',
-    phone: '',
-    id : null,
+    user_name: '',
     isAuthonicated: false,
     isVerified: false,
     local : 'zh-cn',
-    isAdmin : false
+    role : 'user'
 }
 
 type addUserDetailsPayload = {
-    fullName: string,
-    userName: string,
-    email: string,
-    phone: string,
-    id : number
-}
-
-type updateVerified = {
-    fullName: string,
-    userName: string,
-    email: string,
-    phone: string,
-    id : number,
-    isVerified: boolean,
+    user_name: string,
+    role : 'admin' | 'user'
 }
 
 const UserSlice = createSlice({
@@ -46,47 +26,25 @@ const UserSlice = createSlice({
     initialState: initState,
     reducers: {
         addUserDetails: (state, { payload }: PayloadAction<addUserDetailsPayload>) => {
-            state.fullName = payload.fullName;
-            state.userName = payload.userName;
-            state.email = payload.email;
-            state.phone = payload.phone;
-            state.id = payload.id;
+            state.user_name = payload.user_name;
+            state.isVerified = true;
+            state.isAuthonicated = (payload.user_name && payload.role) ? true : false;
+            state.role = payload.role;
         },
-        updateUserVerified: (state, { payload }: PayloadAction<updateVerified>) => {
-            state.fullName = payload.fullName;
-            state.userName = payload.userName;
-            state.email = payload.email;
-            state.phone = payload.phone;
-            state.id = payload.id
-            state.isAuthonicated = true;
-            state.isVerified = payload.isVerified;
-        },
+        
         resetUser : (state)=>{
-            state.fullName = '';
-            state.userName = '';
-            state.email = "";
-            state.phone = "";
-            state.id = null
+            state.user_name = '';
             state.isAuthonicated = false;
             state.isVerified = false;
-            state.isAdmin = false
+            state.role = 'user'
         },
         editLocal : (state, { payload }: PayloadAction<{local : string}>)=>{
             state.local = payload?.local;
         },
-        updateAdminVerified: (state, { payload }: PayloadAction<updateVerified>) => {
-            state.fullName = payload.fullName;
-            state.userName = payload.userName;
-            state.email = payload.email;
-            state.phone = payload.phone;
-            state.id = payload.id
-            state.isAuthonicated = true;
-            state.isVerified = payload.isVerified;
-            state.isAdmin = true;
-        },
+        
     }
 });
 
-export const { addUserDetails, updateUserVerified, resetUser, editLocal, updateAdminVerified } = UserSlice.actions
+export const { addUserDetails, resetUser, editLocal, } = UserSlice.actions
 export default UserSlice.reducer;
 

@@ -9,12 +9,16 @@ export const allClients = async (req: Request<{}, {}, {}, { limit?: number, sear
         const limit: number = req.query.limit ? Number(req.query.limit) : 10;
         const current_page = req.query.current_page ? Number(req.query.current_page) : 0;
 
-        const sql_cmd = `select * from clients where name like '%${search}%' or email like '%${search}%' or phone like '%${search}%' or address like '%${search}%' or city like '%${search}%' or company_name like '%${search}%' or country like '%${search}%' or post_code like '%${search}%' or refference like '%${search}%' or description like '%${search}%' limit ${current_page * limit}, ${limit}`;
+        // const sql_cmd = `select * from clients where name like '%${search}%' or email like '%${search}%' or phone like '%${search}%' or address like '%${search}%' or city like '%${search}%' or company_name like '%${search}%' or country like '%${search}%' or post_code like '%${search}%' or refference like '%${search}%' or description like '%${search}%' limit ${current_page * limit}, ${limit}`;
+
+        const sql_cmd = `select cls.id, cls.name, cls.email, cls.phone, cls.address, cls.city, cls.company_name, cls.country, cls.post_code, cls.refference, cls.description, cls.photo, cls.previous_due, cls.created, cls.updated, clg.name as group_name from clients cls left join client_groups clg on cls.group_id = clg.id where cls.name like '%${search}%' or cls.email like '%${search}%' or cls.phone like '%${search}%' or cls.address like '%${search}%' or cls.city like '%${search}%' or cls.company_name like '%${search}%' or cls.country like '%${search}%' or cls.post_code like '%${search}%' or cls.refference like '%${search}%' or cls.description like '%${search}%' limit ${current_page * limit}, ${limit}`;
 
         const [rows] = await db.execute(sql_cmd)
 
 
         const count_sql = `select count(*) as total from clients where name like '%${search}%' or email like '%${search}%' or phone like '%${search}%' or address like '%${search}%' or city like '%${search}%' or company_name like '%${search}%' or country like '%${search}%' or post_code like '%${search}%' or refference like '%${search}%' or description like '%${search}%'`;
+
+        
 
         const [count] = await db.execute(count_sql);
 

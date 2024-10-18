@@ -49,17 +49,17 @@ export const login = async (req: Request<{}, {}, { user_name: string; password: 
             return res.status(500).send({ message: 'Internal Server Error' })
         }
 
-        return res.status(200)
+        res.status(200)
             .cookie("_rfc", refreshToken, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production' ? true : false,
+                secure: process.env.NODE_ENV === 'production',
                 maxAge: 1000 * 60 * 60 * 24 * 3,
-                sameSite: 'lax'
+                // sameSite: 'none'
             }).cookie("_acs", accessToken, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production' ? true : false,
-                maxAge: 1000 * 60 * 5,
-                sameSite: 'lax'
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 1000 * 60 * 5, // 5 minutes
+                // sameSite: 'none'
             })
             .send({
                 accessToken,
@@ -77,9 +77,9 @@ export const login = async (req: Request<{}, {}, { user_name: string; password: 
 
 export const renewAccessToken = async (req: Request, res: Response) => {
     try {
-        let successRenew = false;
+
         const refreshToken = req.cookies._rfc || req.headers.authorization?.split('Bearer ')[1];
-        
+
         if (!refreshToken) {
             return false;
         }
@@ -107,20 +107,19 @@ export const renewAccessToken = async (req: Request, res: Response) => {
             await db.execute<ResultSetHeader>(`update auth set rfc_token = ? where user_name = ?`, [newrefreshToken, rows[0]?.user_name]);
 
             res.cookie("_rfc", newrefreshToken, {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production' ? true : false,
-                    maxAge: 1000 * 60 * 60 * 24 * 3,
-                    sameSite: 'lax'
-                }).cookie("_acs", newaccessToken, {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production' ? true : false,
-                    maxAge: 1000 * 60 * 5,
-                    sameSite: 'lax'
-                })
-                successRenew = true;
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 1000 * 60 * 60 * 24 * 3,
+                // sameSite: 'none'
+            }).cookie("_acs", newaccessToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 1000 * 60 * 5, // 5 minutes
+                // sameSite: 'none'
+            })
+            req.role = rows[0].role;
         }
-
-        return successRenew;
+        return true;
 
     } catch (err) {
         console.log(err)

@@ -7,6 +7,7 @@ import AddClient from "../pages/Dashboard/Crm/Client/AddClient/AddClient";
 import Clients from "../pages/Dashboard/Crm/Client/Clients/Clients";
 import Settings from "../pages/Dashboard/Settings/Settings";
 import Login from "../pages/Login/Login";
+import Private from "../components/Shared/Private";
 
 const Rout = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ const Rout = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <RootDashboard />,
+        element: <Private><RootDashboard /></Private>,
         children: [
             {
                 path: '/dashboard',
@@ -31,7 +32,7 @@ const Rout = createBrowserRouter([
             },
             {
                 path: "/dashboard/crm/client/add",
-                element: <AddClient />
+                element: <Private><AddClient /></Private>
             },
             {
                 path: "/dashboard/crm/client/list",

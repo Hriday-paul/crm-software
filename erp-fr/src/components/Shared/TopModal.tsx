@@ -24,7 +24,7 @@ const TopModal = ({ children, button, title }: { children: React.ReactNode, butt
             >
                 {/* Modal content */}
                 <div
-                    className={`min-h-40 min-w-80 md:min-w-[450px] bg-white border border-stroke rounded absolute left-1/2 shadow-2xl duration-500 ease-in-out transform transition-all -translate-x-1/2 ${openPopup ? 'top-12 opacity-100' : 'top-0 opacity-0'}`}
+                    className={`min-h-40 min-w-80 md:min-w-[450px] max-h-96 bg-white border border-stroke rounded absolute left-1/2 shadow-2xl duration-500 ease-in-out transform transition-all -translate-x-1/2 ${openPopup ? 'top-12 opacity-100' : 'top-0 opacity-0'}`}
                     onClick={(e) => e.stopPropagation()}
                 >
 

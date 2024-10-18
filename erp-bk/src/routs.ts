@@ -5,6 +5,7 @@ import { File_Upload } from './helper/File_upload';
 import { loginValidator } from './validator/auth.validator';
 import { login } from './controller/auth/auth.controler';
 import { VerifyUser } from './helper/VerifyUser';
+import { Check_admin } from './helper/CheckAdmin';
 
 const router = express.Router();
 
@@ -14,9 +15,9 @@ router.post('/post', (req:Request, res:Response)=>{
 
 router.post('/auth/login', File_Upload().none(), loginValidator, login);
 
-router.get('/clients', VerifyUser, allClients)
-router.post('/clients', VerifyUser, File_Upload().single('client_photo'), addClientValidator, addClient);
-router.get('/client-groups', VerifyUser, allGroups)
-router.post('/client-groups', VerifyUser, File_Upload().none(), addClientGroupValidator, addClientGroup);
+router.get('/clients', VerifyUser, Check_admin, allClients)
+router.post('/clients', VerifyUser, Check_admin, File_Upload().single('client_photo'), addClientValidator, addClient);
+router.get('/client-groups', VerifyUser, Check_admin, allGroups)
+router.post('/client-groups', VerifyUser, Check_admin, File_Upload().none(), addClientGroupValidator, addClientGroup);
 
 export default router;

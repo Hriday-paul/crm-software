@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
@@ -13,9 +13,10 @@ import { GiMoneyStack, GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { BiTransfer } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
 // import LanguageSwitcher from "../../../components/ui/LanguageSwitcher";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Redux/Store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Redux/Store";
 import Header from "../Header/Header";
+import { resetUser } from "../../Redux/Slices/UserSlice";
 
 
 const Sidebars = () => {
@@ -23,7 +24,8 @@ const Sidebars = () => {
   const [toggled, setToggled] = useState(false);
   const styles = useSelector((state: RootState) => state.styles);
   const { t } = useTranslation();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch<AppDispatch>()
 
   const tabList = [
     {
@@ -576,6 +578,10 @@ const Sidebars = () => {
 
   ];
 
+  const Signout = useCallback(() => {
+    dispatch(resetUser())
+  }, [])
+
   return (
     <div>
       <div className='flex'>
@@ -618,7 +624,7 @@ const Sidebars = () => {
                 <div className={`flex justify-center items-center gap-2 ${collapsed ? "flex-col" : 'flex-row'}`}>
                   <button className="bg-white/5 rounded-full p-1.5 border border-gray-200"><CiUser className={`text-base ${styles?.inputBorderColor}`} /></button>
                   <button className="bg-white/5 rounded-full p-1.5 border border-gray-200"><IoSettingsOutline className={`text-base ${styles?.inputBorderColor}`} /></button>
-                  <button className={`bg-white/5 rounded-full p-1.5 border border-gray-200 `}> <IoPower className={`text-base ${styles?.inputBorderColor}`} /></button>
+                  <button onClick={Signout} className={`bg-white/5 rounded-full p-1.5 border border-stroke`}> <IoPower className={`text-base ${styles?.inputBorderColor}`} /></button>
                 </div>
 
               </div>

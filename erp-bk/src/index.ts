@@ -13,7 +13,10 @@ import cookieParser from 'cookie-parser';
 
 multer();
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173'],
+  credentials: true
+}));
 // app.use(xss('<script>alert("xss");</script>'));
 app.use(express.json());
 app.use(cookieParser())
