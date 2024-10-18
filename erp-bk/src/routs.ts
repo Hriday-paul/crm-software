@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { addClient, addClientGroup, allClients, allGroups } from './controller/client/client.controler';
+import { addClient, addClientGroup, allClients, allGroups, deleteClient, editClient } from './controller/client/client.controler';
 import { addClientGroupValidator, addClientValidator } from './validator/client.validator';
 import { File_Upload } from './helper/File_upload';
 import { loginValidator } from './validator/auth.validator';
@@ -15,9 +15,12 @@ router.post('/post', (req:Request, res:Response)=>{
 
 router.post('/auth/login', File_Upload().none(), loginValidator, login);
 
-router.get('/clients', VerifyUser, Check_admin, allClients)
+router.get('/clients', VerifyUser, Check_admin, allClients);
 router.post('/clients', VerifyUser, Check_admin, File_Upload().single('client_photo'), addClientValidator, addClient);
-router.get('/client-groups', VerifyUser, Check_admin, allGroups)
+router.put('/clients/:id', VerifyUser, Check_admin, File_Upload().single('client_photo'), addClientValidator, editClient);
+router.delete('/clients/:id', VerifyUser, Check_admin, deleteClient);
+
+router.get('/client-groups', VerifyUser, Check_admin, allGroups);
 router.post('/client-groups', VerifyUser, Check_admin, File_Upload().none(), addClientGroupValidator, addClientGroup);
 
 export default router;

@@ -6,6 +6,7 @@ import { client_group_type, client_types } from './Types';
 import { login_input_types } from '../../pages/Login/Login';
 
 const apiUrl = import.meta.env.VITE_API_URL as string;
+export const base_url = import.meta.env.VITE_BASE_URL!;
 
 const baseApi = createApi({
     reducerPath: 'api',
@@ -56,6 +57,22 @@ const baseApi = createApi({
             }),
             invalidatesTags: ['clients']
         }),
+        editClient: builder.mutation<{ message: string }, {id : number, data : any}>({
+            query: ({data, id}) => ({
+                url: `/clients/${id}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: ['clients']
+        }),
+
+        deleteClient: builder.mutation<{ message: string }, {id : number}>({
+            query: ({id}) => ({
+                url: `/clients/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['clients']
+        }),
 
         clients: builder.query<{ collections: client_types[], count: { total: number }[] }, {current_page : number, limit : number; search : string}>({
             query: ({current_page, limit, search}) => `/clients?current_page=${current_page}&limit=${limit}&search=${search}`,
@@ -65,7 +82,7 @@ const baseApi = createApi({
     })
 })
 
-export const { useAddClientGroupMutation, useClientGroupsQuery, useAddClientMutation, useLoginMutation, useClientsQuery } = baseApi;
+export const { useAddClientGroupMutation, useClientGroupsQuery, useAddClientMutation, useLoginMutation, useClientsQuery, useEditClientMutation, useDeleteClientMutation } = baseApi;
 
 export const reduxApi = baseApi;
 

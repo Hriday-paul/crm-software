@@ -12,7 +12,7 @@ import multer from 'multer'
 import cookieParser from 'cookie-parser';
 
 multer();
-app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors({
   origin: ['http://localhost:5173'],
   credentials: true
@@ -24,15 +24,15 @@ app.use(express.static('public'));
 app.use("/api", router);
 
 // default api home rout
-app.use((req:Request, res:Response)=>{
-  res.json({status : 'connection ok', message : 'api end point not found'}).status(400)
+app.use((req: Request, res: Response) => {
+  res.json({ status: 'connection ok', message: 'api end point not found' }).status(400)
 });
 
 // error handling
-app.use((err:Error, req:Request, res:Response)=>{
+app.use((err: Error, req: Request, res: Response) => {
   res.send({
-    status : 'connection failed',
-    message : 'got api error'
+    status: 'connection failed',
+    message: 'got api error'
   })
 })
 

@@ -1,7 +1,7 @@
 import BreadCrumb from "../../../../../components/Shared/BreadCrump";
 import { Pagination, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
-import { useClientsQuery } from "../../../../../Redux/Features/BaseApi";
+import { useClientsQuery, useDeleteClientMutation } from "../../../../../Redux/Features/BaseApi";
 import AdminLoading from "../../../../../components/Shared/AdminLoading";
 import { client_types } from "../../../../../Redux/Features/Types";
 import { HiOutlineDotsVertical } from "react-icons/hi";
@@ -20,6 +20,10 @@ import PrintSingleClient from "../Template/Print_Single_client";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Print_all_client from "../Template/Print_all_client";
+import EditClient from "../Template/EditClient";
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss'
+import { toast } from "react-toastify";
 
 const bradCrumpList = [
     {
@@ -33,6 +37,7 @@ const bradCrumpList = [
 ];
 
 const Clients = () => {
+    const [postDelete, { isError: dltIsErr, isLoading: dltLoading, isSuccess: dltSuccess, error: dltErr, data: dltData }] = useDeleteClientMutation()
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
     const [debouncedInputValue, setDebouncedInputValue] = useState<string>("");
@@ -41,33 +46,46 @@ const Clients = () => {
     const tableRef = useRef<null | HTMLDivElement>(null);
     const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
+    const base_url = import.meta.env.VITE_BASE_URL!;
+
     const getTriggerNode = (): HTMLElement => {
         return tableRef.current!;
     };
 
     const columns: TableColumnsType<client_types> = [
         {
+            title: 'Photo',
+            dataIndex: 'photo',
+            key: 'photo',
+            render: (photo) => <img src={photo ? base_url + photo : '/placeholder-img.png'} alt="client" className="w-10 h-10 rounded-full" />,
+        },
+        {
             title: 'Name',
+            key: 'name',
             dataIndex: 'name',
-            fixed: 'left',
+            sorter: (a, b) => (a?.name && b.name) ? a?.name.localeCompare(b?.name) : 0,
         },
         {
             title: 'Phone',
+            key: 'phone',
             dataIndex: 'phone',
         },
         {
             title: 'Email',
+            key: 'email',
             dataIndex: 'email',
             sorter: (a, b) => (a?.email && b.email) ? a?.email.localeCompare(b?.email) : 0,
         },
         {
             title: 'Previous due',
+            key: 'previous_due',
             dataIndex: 'previous_due',
             width: 140,
             sorter: (a, b) => (a?.previous_due - b.previous_due),
         },
         {
             title: 'Group',
+            key: 'group_name',
             dataIndex: 'group_name',
             sorter: (a, b) => (a?.group_name && b.group_name) ? a?.group_name.localeCompare(b.group_name) : 0,
         },
@@ -101,14 +119,17 @@ const Clients = () => {
                             <PrintSingleClient client={record} />
                         </PrintComponent>
 
-
-                        <li className={`p-0.5 pl-2 hover:bg-primary dark:hover:bg-primary duration-200 rounded cursor-pointer hover:text-white`}>
+                        <ModalDefault clicker={<li className={`p-0.5 pl-2 hover:bg-primary dark:hover:bg-primary duration-200 rounded cursor-pointer hover:text-white`}>
                             <p className='flex items-center gap-x-1'>
                                 <CiEdit />
                                 <span>Edit</span>
                             </p>
-                        </li>
-                        <li className={`p-0.5 pl-2 hover:bg-primary dark:hover:bg-primary duration-200 rounded cursor-pointer hover:text-white`}>
+                        </li>} title="Client Edit">
+                            <EditClient client={record} />
+                        </ModalDefault>
+
+
+                        <li onClick={() => handleDelete(record?.id)} className={`p-0.5 pl-2 hover:bg-primary dark:hover:bg-primary duration-200 rounded cursor-pointer hover:text-white`}>
                             <p className='flex items-center gap-x-1'>
                                 <AiOutlineDelete />
                                 <span>Delete</span>
@@ -143,7 +164,7 @@ const Clients = () => {
     }
 
     const handleChangeLimit = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
+        setCurrentPage(1);
         setLimit(parseInt(e.target.value));
     }, [])
 
@@ -163,6 +184,36 @@ const Clients = () => {
             }
         }
     }
+
+    const handleDelete = (id: number) => {
+        Swal.fire({
+            title: "Are you sure, want to delete this client?",
+            customClass: {
+                title: "text-base text-slack-900 dark:text-gray-200",
+                cancelButton: "bg-secondary text-white",
+            },
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            confirmButtonColor: "#38CB6E",
+            cancelButtonText: "No",
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                postDelete({ id })
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (dltSuccess) {
+            toast.success(dltData?.message);
+        }
+        if (dltIsErr) {
+            const err = dltErr as { data: { message: string } };
+            toast.error(err?.data?.message);
+        }
+    }, [dltSuccess, dltIsErr])
 
     return (
         <div>

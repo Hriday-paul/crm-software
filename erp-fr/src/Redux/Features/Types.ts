@@ -8,6 +8,7 @@ export type client_group_type = {
 
 export type client_types = {
     id : number
+    group_id ?: number,
     group_name?: string,
     name: string,
     email?: string,
