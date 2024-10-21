@@ -37,7 +37,7 @@ const bradCrumpList = [
 ];
 
 const Clients = () => {
-    const [postDelete, { isError: dltIsErr, isLoading: dltLoading, isSuccess: dltSuccess, error: dltErr, data: dltData }] = useDeleteClientMutation()
+    const [postDelete, { isError: dltIsErr, isSuccess: dltSuccess, error: dltErr, data: dltData }] = useDeleteClientMutation();
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(10);
     const [debouncedInputValue, setDebouncedInputValue] = useState<string>("");
@@ -189,7 +189,7 @@ const Clients = () => {
         Swal.fire({
             title: "Are you sure, want to delete this client?",
             customClass: {
-                title: "text-base text-slack-900 dark:text-gray-200",
+                title: "text-base text-slack-900 dark:text-gray-200 font-satoshi",
                 cancelButton: "bg-secondary text-white",
             },
             icon: 'warning',

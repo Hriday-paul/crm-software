@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import db from '../../config/db'
 import { addClientGroupType, addClientType } from "./types";
 import { validationResult } from "express-validator";
-import { ResultSetHeader } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export const allClients = async (req: Request<{}, {}, {}, { limit?: number, search?: string, current_page?: number }>, res: Response) => {
     try {
@@ -50,44 +50,6 @@ export const addClient = async (req: Request<{}, {}, addClientType>, res: Respon
         await db.execute('insert into clients (name, email, phone, address, city, company_name, country, description, group_id, post_code, previous_due, refference, photo) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', [name, email, phone, address, city, company, country, description, group_id, post_code, previous_due, refference, photo]);
 
         res.status(200).send({ message: 'New Client added successfully' });
-    } catch (err) {
-        res.status(400).send({ message: 'something went wrong, try again.' })
-    }
-}
-
-export const allGroups = async (req: Request, res: Response) => {
-    try {
-        const search = req.query.search ? req.query.search : '';
-        const sql_cmd = `select * from client_groups where name like '%${search}%'`;
-        const [rows] = await db.execute(sql_cmd)
-        res.status(200).send(rows)
-    } catch (err) {
-        res.status(400).send({ message: 'something went wrong, try again.' })
-    }
-}
-
-export const addClientGroup = async (req: Request<{}, {}, addClientGroupType>, res: Response) => {
-    try {
-        const validatorRes = validationResult(req);
-        if (!validatorRes.isEmpty()) {
-            return res.status(400).send({
-                message: "Please fill all valid input",
-                errors: validatorRes.array().map((error) => error?.msg)
-            });
-        }
-        const { name, description = null } = req.body;
-
-        // check group already exist
-        const [rows] = await db.execute('select * from client_groups where name = ?', [name]) as [any, { name: string }[]];
-
-        if (rows.length > 0) {
-            return res.status(400).send({ message: 'Group already exist' });
-        }
-
-        // create new group
-        await db.execute('insert into client_groups (name, description) values (?,?)', [name, description]);
-        res.status(200).send({ message: 'Group create successfully' });
-
     } catch (err) {
         res.status(400).send({ message: 'something went wrong, try again.' })
     }
@@ -175,6 +137,105 @@ export const deleteClient = async (req: Request<{ id: string }>, res: Response) 
         res.status(200).send({ message: 'client delete successfully' });
     } catch (err) {
         console.log(err)
+        res.status(400).send({ message: 'something went wrong, try again.' })
+    }
+}
+
+
+// -----------------groups---------------
+
+export const allGroups = async (req: Request, res: Response) => {
+    try {
+        const search = req.query.search ? req.query.search : '';
+        const sql_cmd = `select * from client_groups where name like '%${search}%'`;
+        const [rows] = await db.execute(sql_cmd)
+        res.status(200).send(rows)
+    } catch (err) {
+        res.status(400).send({ message: 'something went wrong, try again.' })
+    }
+}
+
+export const addClientGroup = async (req: Request<{}, {}, addClientGroupType>, res: Response) => {
+    try {
+        const validatorRes = validationResult(req);
+        if (!validatorRes.isEmpty()) {
+            return res.status(400).send({
+                message: "Please fill all valid input",
+                errors: validatorRes.array().map((error) => error?.msg)
+            });
+        }
+        const { name, description = null } = req.body;
+
+        // check group already exist
+        const [rows] = await db.execute<RowDataPacket[]>('select * from client_groups where name = ?', [name]);
+
+        if (rows.length > 0) {
+            return res.status(400).send({ message: 'Group already exist' });
+        }
+
+        // create new group
+        await db.execute('insert into client_groups (name, description) values (?,?)', [name, description]);
+        res.status(200).send({ message: 'Group create successfully' });
+
+    } catch (err) {
+        res.status(400).send({ message: 'something went wrong, try again.' })
+    }
+}
+
+export const editClientGroup = async (req: Request<{id : string}, {}, addClientGroupType>, res: Response) => {
+    try {
+        const validatorRes = validationResult(req);
+        if (!validatorRes.isEmpty()) {
+            return res.status(400).send({
+                message: "Please fill all valid input",
+                errors: validatorRes.array().map((error) => error?.msg)
+            });
+        }
+        const id = req.params.id;
+        const { name, description = null } = req.body;
+
+        if (!id) {
+            return res.status(400).send({ message: 'Group id is required' });
+        }
+
+        // check group already exist
+        const [rows] = await db.execute<RowDataPacket[]>('select * from client_groups where id = ?', [id]);
+
+        if (rows.length === 0) {
+            return res.status(400).send({ message: 'Group not found' });
+        }
+
+        // update group
+         await db.execute<ResultSetHeader>('update client_groups set name = ?, description = ?, updated = CURRENT_TIMESTAMP where id = ?', [name, description, id]);
+
+        res.status(200).send({ message: 'Group update successfully' });
+
+    } catch (err) {
+        res.status(400).send({ message: 'something went wrong, try again.' })
+    }
+}
+
+export const deleteClientGroup = async (req: Request<{id : string}>, res: Response) => {
+    try {
+        const id = req.params.id;
+
+        if (!id) {
+            return res.status(400).send({ message: 'Group id is required' });
+        }
+
+        // check group already exist
+        const [rows] = await db.execute<RowDataPacket[]>('select * from client_groups where id = ?', [id]);
+
+        if (rows.length === 0) {
+            return res.status(400).send({ message: 'Group not found' });
+        }
+
+        // update group
+         await db.execute<ResultSetHeader>('delete from client_groups where id = ?', [id]);
+
+        res.status(200).send({ message: 'Group delete successfully' });
+
+    } catch (err) {
         res.status(400).send({ message: 'something went wrong, try again.' })
     }
 }

@@ -133,21 +133,21 @@ const Sidebars = () => {
           icon: <MdOutlineAccountBalanceWallet className={`${styles?.textSizePrim}`} />,
           link: "/dashboard/account/accounts",
           subItem: [
-            {
-              title: t("account.subItem.accounts.subItem.addAccounts"),
-              icon: <CgInsertAfter />,
-              link: "/dashboard/account/accounts/add"
-            },
+            // {
+            //   title: t("account.subItem.accounts.subItem.addAccounts"),
+            //   icon: <CgInsertAfter />,
+            //   link: "/dashboard/account/accounts/add"
+            // },
             {
               title: t("account.subItem.accounts.subItem.accountsList"),
               icon: <CiViewList />,
               link: "/dashboard/account/accounts/list"
             },
-            {
-              title: t("account.subItem.accounts.subItem.accountsBalance"),
-              icon: <GiMoneyStack />,
-              link: "/dashboard/account/accounts/balance"
-            },
+            // {
+            //   title: t("account.subItem.accounts.subItem.accountsBalance"),
+            //   icon: <GiMoneyStack />,
+            //   link: "/dashboard/account/accounts/balance"
+            // },
             {
               title: t("account.subItem.accounts.subItem.accountsStatement"),
               icon: <MdOutlineChecklist />,

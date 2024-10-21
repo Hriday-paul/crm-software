@@ -8,6 +8,8 @@ import Clients from "../pages/Dashboard/Crm/Client/Clients/Clients";
 import Settings from "../pages/Dashboard/Settings/Settings";
 import Login from "../pages/Login/Login";
 import Private from "../components/Shared/Private";
+import Groups from "../pages/Dashboard/Crm/Client/Groups/Groups";
+import Accounts from "../pages/Dashboard/Account/Accounts";
 
 const Rout = createBrowserRouter([
     {
@@ -38,6 +40,17 @@ const Rout = createBrowserRouter([
                 path: "/dashboard/crm/client/list",
                 element: <Clients />
             },
+            {
+                path: "/dashboard/crm/client/group",
+                element: <Groups />
+            },
+            {
+                path: "/dashboard/account/accounts/list",
+                element: <Accounts />
+            },
+
+            
+
 
 
             

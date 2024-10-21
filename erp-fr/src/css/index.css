@@ -91,7 +91,7 @@
   @apply dark:!border-b-boxdark;
 }
 .flatpickr-calendar {
-  @apply !p-6 dark:!bg-boxdark dark:!text-bodydark dark:!shadow-8 2xsm:!w-auto;
+  @apply dark:!bg-boxdark dark:!text-bodydark dark:!shadow-8 2xsm:!w-auto;
 }
 .flatpickr-day {
   @apply dark:!text-bodydark dark:hover:!border-meta-4 dark:hover:!bg-meta-4;
@@ -219,4 +219,14 @@ span.flatpickr-weekday,
 .sideScroll::-webkit-scrollbar-thumb {
   background-color: #198D8D !important;
   border-radius: 20px !important;
+}
+
+.modal-box::-webkit-scrollbar {
+  width: 8px;
+  background-color: black;
+}
+
+.modal-box::-webkit-scrollbar-thumb {
+  background-color: #198D8D;
+  border-radius: 20px;
 }

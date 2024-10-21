@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import '../i18n.ts'
+import "flatpickr/dist/themes/material_green.css";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

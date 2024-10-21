@@ -36,7 +36,7 @@ const bradCrumpList = [
 
 const AddClient = () => {
     const [postClient, { isError, isLoading, isSuccess, data, error }] = useAddClientMutation();
-    const { isLoading: groupLoading, data: groupdata } = useClientGroupsQuery();
+    const { isLoading: groupLoading, data: groupdata } = useClientGroupsQuery({search : ''});
     const modalRef = useRef<HTMLDialogElement | null>(null);
     const {
         register,
@@ -101,7 +101,6 @@ const AddClient = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
                         {/* // left side  */}
                         <div>
-
                             <div className="grid grid-cols-1 md:grid-cols-3 items-start mb-4">
                                 <label htmlFor="name" className="text-base text-black font-medium dark:text-white block mb-2 col-span-1 mr-5 md:text-right">
                                     Client Name
@@ -134,7 +133,6 @@ const AddClient = () => {
                             <div className="grid grid-cols-1 md:grid-cols-3 items-start mb-4">
                                 <label htmlFor="phone" className="text-base text-black font-medium dark:text-white block mb-2 col-span-1 mr-5 md:text-right">
                                     Phone
-                                    <span className="text-red-500 text-base ml-1"> * </span>
                                     :
                                 </label>
                                 <input
@@ -194,11 +192,6 @@ const AddClient = () => {
                                     className="w-full rounded-sm border border-stroke px-2 py-1 dark:bg-boxdark dark:border-strokedark col-span-2 focus:border-primary outline-none text-black dark:text-white"
                                 />
                             </div>
-
-
-
-
-
                         </div>
 
                         {/* //right side  */}
@@ -332,11 +325,11 @@ const AddClient = () => {
                 {/* -------------------Dailog------------------- */}
                 <dialog ref={modalRef} className="modal">
                     <div className="modal-box !rounded dark:!bg-boxdark !z-20 !p-0">
-                        <div className="flex justify-between items-center p-4 border-b border-stroke dark:border-strokedark">
-                            <h3 className="text-lg font-medium text-zinc-700 dark:text-gray">Add Client Group</h3>
+                        <div className="flex justify-between items-center p-2.5 border-b border-stroke dark:border-strokedark">
+                            <h3 className="text-base font-medium text-zinc-700 dark:text-gray">Add Client Group</h3>
                             <button type="button" onClick={closeMOdal} className="text-2xl hover:bg-slate-100 dark:hover:bg-boxdark-2 duration-150 py-0.5 px-2.5">&times;</button>
                         </div>
-                        <div className="modal-body p-5">
+                        <div className="modal-body">
                             <AddClientGroup />
                         </div>
                     </div>

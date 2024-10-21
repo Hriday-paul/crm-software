@@ -1,25 +1,27 @@
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAddClientGroupMutation } from "../../../../../Redux/Features/BaseApi";
+import { useEditClientGroupMutation } from "../../../../../Redux/Features/BaseApi";
 import { toast } from "react-toastify";
 import { ImSpinner2 } from "react-icons/im";
+import { client_group_type } from "../../../../../Redux/Features/Types";
 
-export type add_group_type = {
-    grp_name: string;
-    description: string
-}
+const EditGroup = React.memo(({groupData} : {groupData : client_group_type}) => {
+    const [postGroupEdit, { isLoading, isError, isSuccess, data, error }] = useEditClientGroupMutation();
 
-const AddClientGroup = React.memo(() => {
-    const [postGroupCreate, { isLoading, isError, isSuccess, data, error }] = useAddClientGroupMutation()
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<add_group_type>();
+    } = useForm<client_group_type>({
+        defaultValues : {
+            name  : groupData?.name,
+            description : groupData?.description,
+        }
+    });
 
-    const handleAddGroup: SubmitHandler<add_group_type> = (data) => {
-        postGroupCreate(data);
+    const handleEditGroup: SubmitHandler<client_group_type> = (data) => {
+        postGroupEdit({id : groupData?.id, data});
     }
 
     useEffect(() => {
@@ -34,7 +36,7 @@ const AddClientGroup = React.memo(() => {
     }, [isSuccess, isError])
 
     return (
-        <form className="p-5" onSubmit={handleSubmit(handleAddGroup)}>
+        <form className="p-5" onSubmit={handleSubmit(handleEditGroup)}>
             <div className="w-full mb-3">
                 <label htmlFor="name" className="mb-2 block text-black dark:text-white">
                     Name
@@ -43,10 +45,10 @@ const AddClientGroup = React.memo(() => {
                 <input
                     type="text"
                     id="name"
-                    {...register('grp_name', { required: "Name is required", minLength: { value: 3, message: "Name must be at least 3 characters" } })}
-                    className={`w-full rounded-sm border px-2 py-1 dark:bg-boxdark outline-none text-black dark:text-white ${errors.grp_name ? 'border-red-500' : 'border-stroke dark:border-strokedark focus:border-primary'}`}
+                    {...register('name', { required: "Name is required", minLength: { value: 3, message: "Name must be at least 3 characters" } })}
+                    className={`w-full rounded-sm border px-2 py-1 dark:bg-boxdark outline-none text-black dark:text-white ${errors.name ? 'border-red-500' : 'border-stroke dark:border-strokedark focus:border-primary'}`}
                 />
-                {errors.grp_name && <p className="text-red-500 text-sm">{errors.grp_name.message}</p>}
+                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
             <div className="w-full mb-3">
@@ -70,4 +72,4 @@ const AddClientGroup = React.memo(() => {
     );
 });
 
-export default AddClientGroup;
+export default EditGroup;

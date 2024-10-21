@@ -18,3 +18,19 @@ export type addClientGroupType = {
     name : string,
     description : string | null
 }
+
+export type addAccountType = {
+    name : string;
+    balance ?: number;
+    account_num ?: string;
+    contact_person_phone ?: string;
+    description ?: string;
+    created ?: string
+}
+
+export type editAccountType = {
+    name : string;
+    account_num ?: string;
+    contact_person_phone ?: string;
+    description ?: string;
+}

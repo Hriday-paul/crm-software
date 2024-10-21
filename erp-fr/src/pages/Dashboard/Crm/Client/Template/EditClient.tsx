@@ -8,7 +8,7 @@ import { base_url, useClientGroupsQuery, useEditClientMutation } from '../../../
 import { toast } from 'react-toastify';
 
 const EditClient = React.memo(({ client }: { client: client_types }) => {
-    const { isLoading: groupLoading, data: groupdata } = useClientGroupsQuery();
+    const { isLoading: groupLoading, data: groupdata } = useClientGroupsQuery({search : ''});
     const [postEdit, { isError, isLoading, isSuccess, error, data }] = useEditClientMutation();
     const [photo, setPhoto] = useState<File | null>(null);
 
@@ -105,7 +105,6 @@ const EditClient = React.memo(({ client }: { client: client_types }) => {
                         <div className="grid grid-cols-1 md:grid-cols-3 items-start mb-4">
                             <label htmlFor="phone" className="text-base text-black font-medium dark:text-white block mb-2 col-span-1 mr-5 md:text-right">
                                 Phone
-                                <span className="text-red-500 text-base ml-1"> * </span>
                                 :
                             </label>
                             <input

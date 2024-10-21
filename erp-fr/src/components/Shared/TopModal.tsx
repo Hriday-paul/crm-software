@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-const TopModal = ({ children, button, title }: { children: React.ReactNode, button: React.ReactElement, title: string }) => {
+const TopModal = ({ children, clicker, title }: { children: React.ReactNode, clicker: React.ReactElement, title: string }) => {
     const [openPopup, setOpenPopup] = useState(false);
 
     const handleClose = useCallback((e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
@@ -15,7 +15,7 @@ const TopModal = ({ children, button, title }: { children: React.ReactNode, butt
     return (
         <div>
             <span onClick={handleOpenBtn}>
-                {button}
+                {clicker}
             </span>
             {/* Overlay */}
             <div
